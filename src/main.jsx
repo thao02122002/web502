@@ -21,7 +21,11 @@ const showAge = (age) => <p>Tuoi cua ban la: {age}</p> // 20
 
 const ShowAge = props => <p>Tuoi cua ban la: {props.age}</p> // { age: 20, name: "Dat" }
 
-ReactDOM.render(<div>
+ReactDOM.render(
+  <React.StrictMode>
+    <App/>
+  </React.StrictMode>,
+/* <div>
   <p>Ten: {person.name} </p>
   <p>Tuoi: {person.age} </p>
   <p>{person.status ? "Da ket hon" : "Chua ket hon"}</p>
@@ -32,4 +36,5 @@ ReactDOM.render(<div>
   </ul>
   <div>function: { showAge(person.age) }</div>
   <div>Component: <ShowAge age={person.age} name="Dat" /></div>
-</div>, document.querySelector('#root'));
+</div>,  */
+document.querySelector('#root'));
