@@ -10,6 +10,7 @@ import ProductManager from './pages/Layouts/Admin/ProductManager'
 import WebsiteLayout from './pages/Layouts/Website/WebsiteLayout'
 import ProductPage from './pages/Layouts/Website/ProductPage'
 import type { Product } from './type/product'
+import ProductDetail from './pages/Layouts/Website/ProductDetail'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,16 +32,26 @@ function App() {
       </header>
       <main>
         <Routes>
+
           <Route path='/' element={< WebsiteLayout />}>
             <Route index element={<HomePage />} />
+            {/* Cách 1: để vào chi tiết sản phẩm 
+                <Route path="product">
+                  <Route element={<ProductPage />} />
+                  <Route path=":id" element={<ProductDetail />} />
+                </Route> */}
+            {/*cách 2: vào chi tiết sản phẩm */}
             <Route path='product' element={<ProductPage />} />
+            <Route path='/product/:id' element={< ProductDetail />} />
             <Route path='about' element={<AboutPage />} />
           </Route>
+
           <Route path='/admin' element={<AdminLayout />}>
             <Route index element={<Navigate to="/admin/dashboard" />} />
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='productManager' element={< ProductManager />} />
           </Route>
+
         </Routes>
       </main>
     </div>
