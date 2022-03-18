@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
-
+import { useNavigate } from "react-router-dom";
 type Inputs = {
     name: string,
     price: number,
@@ -15,10 +15,13 @@ type ProductAddProps = {
 
 const ProductAdd = (props: ProductAddProps) => {
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
+    //sử dụng hook useNavigate để chuyển trang
+    const navigate = useNavigate()
     const onSubmit: SubmitHandler<Inputs> = (dataInput) => {
         // console.log(dataInput); // là 1 object{ name, price}
-        props.onAdd(dataInput)
-        //call api
+        props.onAdd(dataInput);
+        // chuyển trang
+        navigate("/admin/dashboard");
     }
 
     return (
