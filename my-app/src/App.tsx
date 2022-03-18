@@ -9,13 +9,13 @@ import Dashboard from './pages/Layouts/Admin/Dashboard'
 import ProductManager from './pages/Layouts/Admin/ProductManager'
 import WebsiteLayout from './pages/Layouts/Website/WebsiteLayout'
 import ProductPage from './pages/Layouts/Website/ProductPage'
-import type { Product } from './type/product'
+import type { ProductType } from './type/product'
 import ProductDetail from './pages/Layouts/Website/ProductDetail'
 import ProductAdd from './pages/Layouts/Admin/ProductAdd'
 import { add, list } from './api/product'
 
 function App() {
-  const [products, setProducts] = useState<{ _id: number, name: string }[]>([])
+  const [products, setProducts] = useState<ProductType[]>([])
 
   useEffect(() => {
     const getProducts = async () => {
@@ -62,13 +62,16 @@ function App() {
             <Route path='about' element={<AboutPage />} />
           </Route>
 
-          <Route path='/admin' element={<AdminLayout />}>
+          <Route path='admin' element={<AdminLayout />}>
             {/* khi truy cập vào admin thì chuyển đến index thông qua thằng Navigate */}
             <Route index element={<Navigate to="/admin/dashboard" />} />
             {/* khi chạy index xog thì mặc đình nó sẽ truyển thằng Dashboard vào Outlet của thằng AdminLayout */}
             <Route path='dashboard' element={<Dashboard />} />
-            <Route path='productManager' element={< ProductManager />} />
-            <Route path='productAdd' element={< ProductAdd name="Thao" onAdd={onHandleAdd} />} />
+            <Route path='product'>
+              <Route index element={< ProductManager products={products} />} />
+              <Route path='add' element={< ProductAdd name="Thao" onAdd={onHandleAdd} />} />
+            </Route>
+
 
 
           </Route>

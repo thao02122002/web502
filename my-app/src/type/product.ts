@@ -1,5 +1,6 @@
-export type Product = {
-    name: String;
-    age: Number
+export type ProductType = {
+    _id: Number,
+    name: String,
+    price: Number
 
 }

@@ -21,7 +21,7 @@ const ProductAdd = (props: ProductAddProps) => {
         // console.log(dataInput); // là 1 object{ name, price}
         props.onAdd(dataInput);
         // chuyển trang
-        navigate("/admin/dashboard");
+        navigate("/admin/product");
     }
 
     return (
