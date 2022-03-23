@@ -12,11 +12,12 @@ import ProductPage from './pages/Layouts/Website/ProductPage'
 import type { ProductType } from './type/product'
 import ProductDetail from './pages/Layouts/Website/ProductDetail'
 import ProductAdd from './pages/Layouts/Admin/ProductAdd'
-import { add, list } from './api/product'
+import { add, list, remove, update } from './api/product'
+import ProductEdit from './pages/Layouts/Admin/ProductEdit'
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([])
-
+  console.log(products);
   useEffect(() => {
     const getProducts = async () => {
       const { data } = await list();
@@ -33,6 +34,26 @@ function App() {
     //reRender
     setProducts([...products, data]);
 
+  }
+  const onHandleRemove = async (id: number) => {
+    remove(id);
+    // rerender
+    setProducts(products.filter(item => item._id !== id));
+  }
+
+  const onHandleUpdate = async (product: ProductType) => {
+    try {
+      // api
+      const { data } = await update(product);
+
+      //reRender
+      //tạo ra 1 vòng lặp nếu item.id nó trùng vs cái id sp vừa truyền vào thì cập nhật lại data k thì ngược lại vẫn giữ nguyên cái cũ
+
+      setProducts(products.map(item => item._id === data._id ? product : item))
+
+    } catch (error) {
+
+    }
   }
 
   return (
@@ -68,7 +89,8 @@ function App() {
             {/* khi chạy index xog thì mặc đình nó sẽ truyển thằng Dashboard vào Outlet của thằng AdminLayout */}
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='product'>
-              <Route index element={< ProductManager products={products} />} />
+              <Route index element={< ProductManager products={products} onRemove={onHandleRemove} />} />
+              <Route path='/admin/product/:id/edit' element={<ProductEdit onUpdate={onHandleUpdate} />} />
               <Route path='add' element={< ProductAdd name="Thao" onAdd={onHandleAdd} />} />
             </Route>
 

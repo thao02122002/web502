@@ -6,7 +6,7 @@ type Inputs = {
     price: number,
 };
 
-
+// khai báo ra để BẮN DỮ LIỆU LÊN APP.TSX
 type ProductAddProps = {
     name: String,
     onAdd: (product: Inputs) => void
