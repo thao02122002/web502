@@ -14,6 +14,7 @@ import ProductDetail from './pages/Layouts/Website/ProductDetail'
 import ProductAdd from './pages/Layouts/Admin/ProductAdd'
 import { add, list, remove, update } from './api/product'
 import ProductEdit from './pages/Layouts/Admin/ProductEdit'
+import PrivateRouter from './pages/Layouts/Admin/PrivateRouter'
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([])
@@ -83,7 +84,7 @@ function App() {
             <Route path='about' element={<AboutPage />} />
           </Route>
 
-          <Route path='admin' element={<AdminLayout />}>
+          <Route path='admin' element={< PrivateRouter><AdminLayout /></PrivateRouter>  }>
             {/* khi truy cập vào admin thì chuyển đến index thông qua thằng Navigate */}
             <Route index element={<Navigate to="/admin/dashboard" />} />
             {/* khi chạy index xog thì mặc đình nó sẽ truyển thằng Dashboard vào Outlet của thằng AdminLayout */}
@@ -97,6 +98,7 @@ function App() {
 
 
           </Route>
+          <Route path='/login' element={<h1>Login Page</h1>} />
 
         </Routes>
       </main>
