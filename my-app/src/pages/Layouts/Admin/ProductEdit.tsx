@@ -10,8 +10,8 @@ type ProductEditProps = {
 }
 
 type FormInputs = {
-    name: String,
-    price: Number
+    name: string,
+    price: number
 }
 
 const ProductEdit = (props: ProductEditProps) => {

@@ -15,9 +15,14 @@ import ProductAdd from './pages/Layouts/Admin/ProductAdd'
 import { add, list, remove, update } from './api/product'
 import ProductEdit from './pages/Layouts/Admin/ProductEdit'
 import PrivateRouter from './pages/Layouts/Admin/PrivateRouter'
+import SignUp from './pages/Layouts/Website/SignUp'
+import SignIn from './pages/Layouts/Website/SignIn'
+
+
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([])
+  
   console.log(products);
   useEffect(() => {
     const getProducts = async () => {
@@ -55,8 +60,11 @@ function App() {
     } catch (error) {
 
     }
-  }
 
+  }
+  
+
+  
   return (
     <div className="App">
       <header>
@@ -82,6 +90,7 @@ function App() {
             <Route path='product' element={<ProductPage />} />
             <Route path='/product/:id' element={< ProductDetail />} />
             <Route path='about' element={<AboutPage />} />
+            
           </Route>
 
           <Route path='admin' element={< PrivateRouter><AdminLayout /></PrivateRouter>  }>
@@ -95,10 +104,18 @@ function App() {
               <Route path='add' element={< ProductAdd name="Thao" onAdd={onHandleAdd} />} />
             </Route>
 
-
+            
 
           </Route>
-          <Route path='/login' element={<h1>Login Page</h1>} />
+          <Route path='/signup' element={< SignUp />} />
+          <Route path='/signin' element={< SignIn  />} />
+
+         
+           
+          
+
+         
+          
 
         </Routes>
       </main>
